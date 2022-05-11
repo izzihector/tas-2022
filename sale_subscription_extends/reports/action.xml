@@ -1,0 +1,11 @@
+<odoo>
+    <record id='sale_subscription_format_action' model='ir.actions.report'>
+        <field name="name">Formato de Subscripción</field>
+        <field name="report_name">sale_subscription_extends.subscription_report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="model">sale.subscription</field>
+        <field name="report_file">sale_subscription_extends.subscription_report</field>
+        <field name="print_report_name">object.name</field>
+    </record>
+
+</odoo>
