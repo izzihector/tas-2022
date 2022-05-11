@@ -30,7 +30,6 @@ class ProjectTaskNativeResource(models.Model):
 
 class ProjectTaskResourceLink(models.Model):
     _name = 'project.task.resource.link'
-    _description = 'Project Task Resource Link'
 
     _order = 'date_start'
 

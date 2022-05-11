@@ -23,39 +23,19 @@ class ProjectTask(models.Model):
     assign_to = fields.Many2many("res.users", 'assign_user_rel', string="Técnico")
     stage_id_name = fields.Char(related="stage_id.name", string='nombre de la etapa')
     resources_list_ids = fields.Many2many('product.product', string='List of Resources', compute="_get_resources_list_ids")
-    partner_child = fields.Many2one('res.partner', store=True, string="Persona de Contacto",readonly=False, domain="[('parent_id', '=', partner_id)]")
+    partner_child = fields.Many2one('res.partner', store=True, string="Persona de Contacto",readonly=False)
     partner_child_email = fields.Char('Correo', related="partner_child.email", readonly=False)
     partner_child_mobile = fields.Char('Teléfono', related="partner_child.mobile", readonly=False)
+
+    # stage_id = fields.Many2one('project.task.type', string='Stage', compute='_compute_stage_id',
+    #     store=True, readonly=False, ondelete='restrict', tracking=True, index=True,
+    #     default= lambda self: self.env.ref('project.task_type_def1').id, group_expand='_read_group_stage_ids',
+    #     domain="[('project_ids', '=', project_id)]", copy=False, task_dependency_tracking=True)
+
+    #New fields
     analytic_group_id = fields.Many2one('account.analytic.group', 'Linea de Negocio', required=False, copy=False, tracking=True)
     analytic_subgroup_id = fields.Many2one('account.analytic.account', 'Sublinea de Negocio', required=False, copy=False, tracking=True)
     service_type_id = fields.Many2one('project.task.service.type', string='Tipo de servicio')
-    project_task_master_id = fields.Many2one('project.task', string='Orden trabajo master', tracking=True)
-    project_task_child_ids = fields.Many2many(comodel_name='project.task', relation='orden_de_trabajo_rel',string='Sub ordenes de trabajo', column1='project_task_master_id',column2='project_task_child_ids',
-     copy=False, tracking=True, domain="[('partner_id','=',partner_id),('id','!=',id),('project_task_master_id','=',False)]")
-
-    @api.onchange('project_task_child_ids')
-    def _onchange_project_task_child_ids(self):
-        for rec in self:
-            if rec.project_task_child_ids:
-                for project in rec.project_task_child_ids:
-                    project.project_task_master_id = rec.id
-
-
-    @api.depends('partner_child','partner_id')
-    def _update_context_partner(self):
-        if self.partner_id:
-            context = self.env.context
-            context['default_parent_id'] = self.partner_id.id
-            context['is_company'] = False
-            context['default_type'] = 'contact'
-            context['default_street'] = self.partner_id.street
-            context['default_street2'] = self.partner_id.street2
-            context['default_city'] = self.partner_id.city
-            context['default_zip'] = self.partner_id.zip
-            context['default_email'] = self.partner_id.email
-            context['default_phone'] = self.partner_id.phone
-            context['default_mobile'] = self.partner_id.mobile
-            self.env.context = context
        
     @api.onchange('partner_id','partner_child','partner_child_email','partner_child_mobile')
     def _parent_contact(self):
@@ -102,8 +82,10 @@ class ProjectTask(models.Model):
     
     @api.model
     def create(self, vals):
+        # print("vals",self.env.ref('project.task_type_def1').id,self.env.ref('project.task_type_def1').name)
         if vals.get('number', _('New')) == _('New'):
             vals['number'] = self.env['ir.sequence'].next_by_code('project.tasks.tas') or _('New')
+        # self.stage_id=self.env.ref('project.task_type_def1').id
         
         result = super(ProjectTask, self).create(vals)
         return result
@@ -112,6 +94,7 @@ class ProjectTask(models.Model):
 class ProjectTasksServiceTicket(models.Model):
     _name = 'project.tasks.service.ticket'
     _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin', 'utm.mixin']
+    #_inherit = 'timer.mixin'
     _description = 'Project Tasks Service Ticket'
     
     name = fields.Char(string='No. Boleta', required=True, 
@@ -129,7 +112,7 @@ class ProjectTasksServiceTicket(models.Model):
     timer_finished = fields.Char('Horas Totales')
 
     date_assign = fields.Datetime(string='Fecha', index=True, copy=False, default=datetime.now())
-    task_id = fields.Many2one('project.task', string='No. de OT', index=True)
+    task_id = fields.Many2one('project.task', string='No. de OT', index=True, required=True)
     company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.company)
     company_logo = fields.Binary(related="company_id.logo")
     tipo_visita = fields.Selection([('a_facturar', 'A Facturar'), ('gratuita', 'Gratuita')], default=('a_facturar'), string="A Cobrar")

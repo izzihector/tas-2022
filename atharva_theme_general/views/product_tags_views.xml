@@ -101,7 +101,6 @@
             <search string="Search Tag">
                 <filter string="Archived" name="archived" domain="[('active', '=', False)]"/> 
                 <filter string="Active" name="active" domain="[('active', '=', True)]"/>
-                <field name="name"/>
             </search>
         </field>
     </record>

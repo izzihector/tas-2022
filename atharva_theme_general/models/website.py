@@ -36,7 +36,7 @@ class Website(models.Model):
     is_breadcum = fields.Boolean(string='Do you want to disable Breadcrumb?')
     breadcrumb_height = fields.Char(string='Padding', default='50px', help='For eg. 50px;')
     breadcum_background_image = fields.Boolean(string='Remove Breadcrumb background image?')
-    shop_product_loader = fields.Selection(selection=[('infinite_loader','Infinite Loader'),('pagination','Pagination')], string='Shop Product Loader', default='pagination')
+    shop_product_loader = fields.Selection(selection=[('infinite_loader','Infinite Loader'),('pagination','Pagination')], string='Shop Product Loader', default='pagination', translate=True)
 
     def get_colors_scss(self):
         data=[]

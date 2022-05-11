@@ -30,7 +30,6 @@
         'views/project_task_view_inherit.xml',
         'reports/report_service_ticket_tmpl.xml',
         'reports/reports.xml',
-        'data/project_task_type.xml'
     ],
     'installable': True,
     'application': True,

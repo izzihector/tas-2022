@@ -7,7 +7,6 @@ from odoo.exceptions import UserError
 
 class bi_wizard_product_bundle(models.TransientModel):
     _name = 'wizard.product.bundle.bi'
-    _description = 'Wizard Product Bundle'
 
     product_id = fields.Many2one('product.product',string='Bundle',required=True)
     product_qty = fields.Integer('Quantity',required=True ,default=1)

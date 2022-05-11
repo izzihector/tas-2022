@@ -15,15 +15,14 @@
             <field name="dpi">80</field>
         </record>
 
-        <record id="tas_quotation_report" model="ir.actions.report">
-            <field name="name">Cotización TAS</field>
-            <field name="report_name">quotation_tas_report.tas_quotation_template</field>
-            <field name="report_type">qweb-pdf</field>
-            <field name="model">sale.order</field>
-            <field name="report_file">quotation_tas_report.tas_quotation_template</field>
-            <field name="print_report_name">object.name</field>
-            <field name="paperformat_id" ref="quotation_tas_report.paperformat_tas_quotation_report"/>
-        </record>
+        <report id="tas_quotation_report"
+            model="sale.order"
+            string="Cotización TAS"
+            name="quotation_tas_report.tas_quotation_template"
+            file="quotation_tas_report.tas_quotation_template"
+            report_type="qweb-pdf"
+            paperformat='paperformat_tas_quotation_report'
+        />
 
     </data>
 </odoo>

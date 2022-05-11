@@ -44,4 +44,4 @@ class HelpdeskTicketInherited(models.Model):
     mobile = fields.Char(string='Mobile')
 
     subscriptions = fields.Many2many('sale.subscription', string='Subscriptions')
-    tasks = fields.Many2many('project.task', string='Tasks ')
+    tasks = fields.Many2many('project.task', string='Tasks')

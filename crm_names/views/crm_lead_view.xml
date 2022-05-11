@@ -47,7 +47,7 @@
             <xpath expr="//kanban/field[@name='stage_id']" position="after">
                 <field name="name_id"/>
             </xpath>
-            <xpath expr="//t/div/div[hasclass('oe_kanban_content')]/div/strong[hasclass('o_kanban_record_title')]/field[@name='name']" position="replace">
+            <xpath expr="//t/div/div[@class='oe_kanban_content']/div/strong[@class='o_kanban_record_title']/field[@name='name']" position="replace">
                 <field name="name" invisible="1"/>
                 <field name="name_id"/>
             </xpath>

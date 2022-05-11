@@ -1,52 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="res_partner_inherit_tas" model="ir.ui.view">
-        <field name="name">res.partner.inherit.tas</field>
-        <field name="model">res.partner</field>
-        <field name="arch" type="xml">
-        <form string="Contact / Address">
-            <sheet>
-                <field name="type" required="1" widget="radio" options="{'horizontal': true}"/>
-                <field name="parent_id" invisible="1"/>
-                <hr/>
-                <group col="12">
-                    <group colspan="5">
-                        <field name="name" string="Contact Name" attrs="{'required' : [('type', '=', 'contact')]}"/>
-                        <field name="title" placeholder="e.g. Mr." attrs="{'invisible': [('type','!=', 'contact')]}"/>
-                        <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}"/>
-                        <label for="street" string="Address" attrs="{'invisible': [('type','=', 'contact')]}"/>
-                        <div attrs="{'invisible': [('type','=', 'contact')]}">
-                            <div class="o_address_format" name="div_address">
-                                <field name="street" placeholder="Street..." class="o_address_street"/>
-                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
-                                <field name="city" placeholder="City" class="o_address_city"/>
-                                <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
-                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
-                                <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
-                            </div>
-                        </div>
-                        <field name="comment" placeholder="Internal notes..."/>
-                    </group>
-                    <group colspan="5">
-                        <field name="email" widget="email"/>
-                        <field name="phone" widget="phone"/>
-                        <field name="mobile" widget="phone"/>
-                        <field name="company_id" invisible="1"/>
-                    </group>
-                    <group colspan="1">
-                        <field name="image_1920" widget="image" class="oe_avatar" nolabel="1" options="{'image_preview': 'image_128'}"/>
-                    </group>
-                </group>
-                <field name="lang" invisible="True"/>
-                <field name="user_id" invisible="True"/>
-                <field name="image_128" invisible="1"/>
-            </sheet>
-        </form>
-        </field>
-    </record>
-
-
     <record id="project_task_form_inherit" model="ir.ui.view">
         <field name="name">project.task.form.inherit</field>
         <field name="model">project.task</field>
@@ -64,8 +18,7 @@
             </xpath>-->
 
             <xpath expr="//field[@name='sale_line_id']" position="after">
-                <field name="partner_child" class="o_task_customer_field"  context="{'default_partner_id':partner_id,'form_view_ref': 'external_service_extends.res_partner_inherit_tas'}"/>
-                <field name="project_task_master_id"/>
+                <field name="partner_child" domain="[('parent_id', '>=', 1)]" class="o_task_customer_field" />
                 <field name="partner_child_email" widget="email" />
                 <field name="partner_child_mobile" widget="phone" />
                 <!-- <field name="recurring_task" attrs="{'invisible': [('allow_recurring_tasks', '=', False)]}"/> -->
@@ -99,11 +52,6 @@
                 <!-- <field name="recurring_task" attrs="{'invisible': [('allow_recurring_tasks', '=', False)]}" invisible="1"/> -->
                 <field name="recurring_task" invisible="1" />
             </xpath>
-            <notebook position="inside">
-            <page name="anexo" string="Anexos">
-                <field name="project_task_child_ids" options="{'no_open': False, 'no_quick_create': True}"/>            
-            </page>
-            </notebook>
 
         </field>
     </record>

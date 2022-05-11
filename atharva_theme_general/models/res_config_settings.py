@@ -15,4 +15,4 @@ class WebsiteConfigSettings(models.TransientModel):
     breadcum_background_image = fields.Boolean(string="Remove Breadcrumb background image?" ,related='website_id.breadcum_background_image',readonly=False)
     breadcrumb_color = fields.Char('Backgroud Color #', related='website_id.breadcrumb_color',readonly=False)
     breadcrumb_text_color = fields.Char('Text Color #', related='website_id.breadcrumb_text_color',readonly=False)
-    shop_product_loader = fields.Selection(selection=[('infinite_loader','Infinite Loader'),('pagination','Pagination')],  default='infinite_loader', translate=True,readonly=False)
+    shop_product_loader = fields.Selection(selection=[('infinite_loader','Infinite Loader'),('pagination','Pagination')], related='website_id.shop_product_loader', default='infinite_loader', translate=True,readonly=False)

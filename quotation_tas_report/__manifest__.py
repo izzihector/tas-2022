@@ -4,7 +4,7 @@
     'author': 'XETECHS GT',
     'license': 'LGPL-3',
     'depends': [
-        'sale_management','external_service_extends'
+        'sale_management'
     ],
     'data': [
         'security/ir.model.access.csv',

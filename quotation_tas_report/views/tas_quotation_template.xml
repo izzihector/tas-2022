@@ -27,26 +27,23 @@
                     <div class="col-6">
                       <div class="text-justify ml-5">
                         <b>Cliente: </b><span t-esc="o.partner_id.name"/><br/>
-                        <b>NIT: </b><span t-esc="o.partner_id.vat"/><br/>
-                        <b>Proyecto: </b><span t-if="o.analytic_account_id" t-esc="o.analytic_account_id.name"/><br/>
-                        <b>Atención: </b><span t-if="o.atencion" t-esc="o.atencion.name"/>&#160;&#160;&#160;&#160;
-                        <i class="fa fa-phone icon-large"><t t-if="o.atencion" t-esc="o.atencion.phone or o.atencion.mobile"/></i><br/>
-                        <b>E-mail: </b><span  t-if="o.atencion" t-esc="o.atencion.email"/><br/>
+                        <b>Proyecto: </b><span t-esc="''"/><br/>
+                        <b>Atención: </b><span t-esc="o.partner_id.name"/><br/>
+                        <b>E-mail: </b><span t-esc="o.partner_id.name"/><br/>
                       </div>
                     </div>
                     <div class="col-6">
                       <div class="text-justify">
-                        <b>Fecha: </b><t t-esc="o.get_fecha_pedido(o.date_order)"/><br/>
+                        <b>Fecha: </b><span t-esc="o.date_order.strftime('%d de %B de %Y')"/><br/>
                         <t t-if="o.validity_date">
-                          <b>Vigencia de Oferta: </b><t t-esc="o.get_fecha_pedido(o.validity_date)"/><br/>
+                          <b>Vigencia de Oferta: </b><span t-esc="o.validity_date.strftime('%d de %B de %Y')"/><br/>
                         </t>
-                        <b>Plazo de Pago: </b><t t-if="o.payment_term_id" t-esc="o.payment_term_id.name"/><br/>
                         <b>Proforma: </b><span t-field="o.name"/><br/>
                       </div>
                     </div>
                   </div>
-                  <div class="row mt-1" style="background-color:#a61e31;">
-                    <div class="col-12 text-center"><h2><b><span t-field="o.title"/></b></h2></div>
+                  <div class="row mt-1" style="background-color:red;height:25px;">
+                    <div class="col-12 text-center"><span t-field="o.title"/></div>
                   </div>
                   <div class="row">
                     <table class="table table-sm o_main_table">
@@ -121,7 +118,7 @@
                         <t t-foreach="o.sale_order_tas_data" t-as="jojo">
                           <tr>
                             <td><p t-esc="jojo.name.upper()"/></td>
-                            <td style="text-justify"><p t-field="jojo.description"/></td>
+                            <td><p t-field="jojo.description"/></td>
                           </tr>
                         </t>
                         <tr>

@@ -8,7 +8,7 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     comments = fields.Text(string='Comments')
-    title = fields.Char('Title', help="SO Title")
+    title = fields.Char('Title', help="SO Title", required=True)
     is_project = fields.Boolean('Is Project', help="Select an existing project")
     analytic_account_id = fields.Many2one('account.analytic.account', string='Analytic Account', copy=False)
     analytic_tag_ids = fields.Many2many('account.analytic.tag', string='Analytic Tag', copy=False)

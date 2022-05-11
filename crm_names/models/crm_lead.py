@@ -14,7 +14,7 @@ import odoo.addons.decimal_precision as dp
 class CrmLead(models.Model):
     _inherit = "crm.lead"
 
-    name_id = fields.Many2one('crm.lead.names', 'Oportunidad')
+    name_id = fields.Many2one('crm.lead.names', 'Oportunidad', required=True)
     edit_customer_qualification = fields.Boolean('Editar', compute="_get_edit")
     customer_qualification = fields.Selection([('1', '1'),('2', '2'),('3', '3'),('4', '4'),('5', '5'),('6', '6'),('7', '7'),('8', '8'),('9', '9'),('10', '10')], "Calificacion", default='1', required=True)
     partner_shipping_id = fields.Many2one('res.partner', string='Direccion de Entrega', readonly=False, required=False)

@@ -3,7 +3,6 @@ from odoo import api, fields, models
 
 class ProjectTaskPerDiem(models.Model):
     _name = 'project.task.per.diem'
-    _description = 'Project Task Per Diem'
 
     def _subtotal(self):
         for data in self:

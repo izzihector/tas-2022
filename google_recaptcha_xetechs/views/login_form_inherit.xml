@@ -1,7 +1,7 @@
 <odoo>
 	
 	<template id="login_ext" name="Login" inherit_id="web.login">
-		<xpath expr="//div[hasclass('form-group field-password')]" position="after">
+		<xpath expr="//div[@class='form-group field-password']" position="after">
 			<div class="form-group field-password">
                 <script src='https://www.google.com/recaptcha/api.js'></script>
     			<div class="g-recaptcha" t-att-data-sitekey="request.params.get('google_site_key')"></div>

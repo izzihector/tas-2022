@@ -3,7 +3,6 @@ from odoo import api, fields, models
 
 class ProjectTaskResource(models.Model):
     _name = 'project.task.resource'
-    _description = 'Project Task Resource'
 
     product_id = fields.Many2one('product.product', 'Producto', domain=[('type','in',['consu', 'product'])])
     uom = fields.Many2one('uom.uom', related="product_id.uom_id", string="Unidad de medida")

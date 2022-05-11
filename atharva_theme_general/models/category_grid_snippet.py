@@ -4,7 +4,6 @@ from odoo import fields, models
 
 class ProductPublicCategory(models.Model):
 	_name = 'category.lines'
-	_description = 'Category Lines'
 	_order = 'sequence'
 
 	sequence = fields.Integer(string='Sequence')

@@ -137,7 +137,6 @@ class MegamenuContent(models.Model):
 
 class Megamenu_slider(models.Model):
     _name="megamenu_slider"
-    _description="Website Megamenu Slider"
 
     slider_image_img = fields.Binary(string='Image',store=True)
     slider_image_name = fields.Char(string='Image Name')

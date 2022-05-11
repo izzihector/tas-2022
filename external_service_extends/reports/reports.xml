@@ -2,15 +2,15 @@
 <odoo>
     <data>
 
-        <record id="action_service_ticket_report" model='ir.actions.report'>
-            <field name="name">Service Ticket Report</field>
-            <field name="report_name">external_service_extends.report_service_ticket_tmpl</field>
-            <field name="report_type">qweb-pdf</field>
-            <field name="model">project.task.service.ticket</field>
-            <field name="report_file">external_service_extends.report_service_ticket_tmpl</field>
-            <field name="print_report_name">object.name</field>
-        </record>
-                
+        <report
+                id="action_service_ticket_report"
+                model="project.tasks.service.ticket"
+                string="Reporte de Servicio"
+                report_type="qweb-pdf"
+                name="external_service_extends.report_service_ticket_tmpl"
+                file="external_service_extends.report_service_ticket_tmpl"
+                print_report_name="object.name"
+        />
 
         <!--Formato Formula Maestra de Acondicionado-->
         <record id="paperformat_service_ticket" model="report.paperformat">

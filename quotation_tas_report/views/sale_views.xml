@@ -8,9 +8,6 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='partner_shipping_id']" position="after">
-                    <field name="atencion" class="o_task_customer_field"  context="{'default_parent_id':partner_id,'default_partner_id':partner_id,'form_view_ref': 'external_service_extends.res_partner_inherit_tas'}"/>
-                </xpath>
 
                 <xpath expr="//field[@name='payment_term_id']" position="after">
                     <field name="sale_order_tas_data" string="Observaciones TAS" widget="many2many_tags"/>
